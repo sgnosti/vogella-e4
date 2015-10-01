@@ -10,7 +10,6 @@ import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -71,6 +70,8 @@ public class TodoOverviewPart {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
+				// TODO checkout if TodoDetailsPart contains modified data and
+				// trigger confirmation dialog
 				IStructuredSelection selection = viewer.getStructuredSelection();
 				selectionService.setSelection(selection.getFirstElement());
 			}
@@ -85,7 +86,7 @@ public class TodoOverviewPart {
 				viewer.setInput(model.getTodos());
 			}
 		});
-		
+
 		menuService.registerContextMenu(viewer.getControl(), "com.example.e4.rcp.todo.popupmenu.table");
 
 	}

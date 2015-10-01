@@ -29,20 +29,21 @@ public class MyTodoServiceImpl implements ITodoService {
 	// Saves or updates
 	@Override
 	public synchronized boolean saveTodo(Todo newTodo) {
-		boolean created =false;
+		boolean created = false;
+		System.out.println("Saving todo " + newTodo.getSummary());
 		Todo updateTodo = findById(newTodo.getId());
 		if (updateTodo == null) {
-			created=true;
-			updateTodo= new Todo(current++);
+			created = true;
+			updateTodo = new Todo(current++);
 			todos.add(updateTodo);
-		} 
+		}
 		updateTodo.setSummary(newTodo.getSummary());
 		updateTodo.setDescription(newTodo.getDescription());
 		updateTodo.setDone(newTodo.isDone());
 		updateTodo.setDueDate(newTodo.getDueDate());
-		
+
 		// Send out events
-		if (created){
+		if (created) {
 		} else {
 		}
 		return true;
@@ -70,19 +71,19 @@ public class MyTodoServiceImpl implements ITodoService {
 	}
 
 	// Example data, change if you like
-		private List<Todo> createInitialModel() {
-			List<Todo> list = new ArrayList<Todo>();
-			list.add(createTodo("Application model", "Flexible and extensible"));
-			list.add(createTodo("DI", "@Inject as programming mode"));
-			list.add(createTodo("OSGi", "Services"));
-			list.add(createTodo("SWT", "Widgets"));
-			list.add(createTodo("JFace", "Especially Viewers!"));
-			list.add(createTodo("CSS Styling","Style your application"));
-			list.add(createTodo("Eclipse services","Selection, model, Part"));
-			list.add(createTodo("Renderer","Different UI toolkit"));
-			list.add(createTodo("Compatibility Layer", "Run Eclipse 3.x"));
-			return list;
-		}
+	private List<Todo> createInitialModel() {
+		List<Todo> list = new ArrayList<Todo>();
+		list.add(createTodo("Application model", "Flexible and extensible"));
+		list.add(createTodo("DI", "@Inject as programming mode"));
+		list.add(createTodo("OSGi", "Services"));
+		list.add(createTodo("SWT", "Widgets"));
+		list.add(createTodo("JFace", "Especially Viewers!"));
+		list.add(createTodo("CSS Styling", "Style your application"));
+		list.add(createTodo("Eclipse services", "Selection, model, Part"));
+		list.add(createTodo("Renderer", "Different UI toolkit"));
+		list.add(createTodo("Compatibility Layer", "Run Eclipse 3.x"));
+		return list;
+	}
 
 	private Todo createTodo(String summary, String description) {
 		return new Todo(current++, summary, description, false, new Date());

@@ -13,6 +13,8 @@ import org.eclipse.core.databinding.observable.list.IObservableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -25,10 +27,10 @@ import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.example.e4.rcp.todo.model.ITodoService;
 import com.example.e4.rcp.todo.model.Todo;
 
 public class TodoDetailsPart {
-
 
 	private Text summary;
 	private Text description;
@@ -36,10 +38,15 @@ public class TodoDetailsPart {
 	private DateTime dateTime;
 	private DataBindingContext ctx = new DataBindingContext();
 
+	@Inject
+	MDirtyable dirty;
+
 	// Define listener for the databinding
 	IChangeListener listener = new IChangeListener() {
 		@Override
 		public void handleChange(ChangeEvent event) {
+			if (dirty != null)
+				dirty.setDirty(true);
 		}
 	};
 	private Todo todo;
@@ -72,8 +79,7 @@ public class TodoDetailsPart {
 		lblNewLabel.setText("Due Date");
 
 		dateTime = new DateTime(parent, SWT.BORDER);
-		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false,
-				1, 1));
+		dateTime.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 1, 1));
 		new Label(parent, SWT.NONE);
 
 		btnDone = new Button(parent, SWT.CHECK);
@@ -82,10 +88,8 @@ public class TodoDetailsPart {
 		updateUserInterface(todo);
 	}
 
-
 	@Inject
-	public void setTodo(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
+	public void setTodo(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Todo todo) {
 		if (todo != null) {
 			// Remember the todo as field
 			this.todo = todo;
@@ -95,6 +99,10 @@ public class TodoDetailsPart {
 	}
 
 	private void updateUserInterface(Todo todo) {
+
+		if (todo == null) {
+			enableUserInterface(false);
+		}
 
 		// Check if the user interface is available
 		// assume you have a field called "summary"
@@ -111,14 +119,10 @@ public class TodoDetailsPart {
 			// Remove bindings
 			ctx.dispose();
 
-			IObservableValue target = WidgetProperties.text(SWT.Modify)
-					.observe(summary);
-			IObservableValue model = PojoProperties.value(Todo.FIELD_SUMMARY)
-					.observe(todo);
-			
+			IObservableValue target = WidgetProperties.text(SWT.Modify).observe(summary);
+			IObservableValue model = PojoProperties.value(Todo.FIELD_SUMMARY).observe(todo);
 
-			Binding bindValue = 
-					ctx.bindValue(target, model);
+			Binding bindValue = ctx.bindValue(target, model);
 			ControlDecorationSupport.create(bindValue, SWT.TOP | SWT.LEFT);
 
 			target = WidgetProperties.text(SWT.Modify).observe(description);
@@ -129,12 +133,9 @@ public class TodoDetailsPart {
 			model = PojoProperties.value(Todo.FIELD_DONE).observe(todo);
 			ctx.bindValue(target, model);
 
-			IObservableValue observeSelectionDateTimeObserveWidget = WidgetProperties
-					.selection().observe(dateTime);
-			IObservableValue dueDateTodoObserveValue = PojoProperties.value(
-					Todo.FIELD_DUEDATE).observe(todo);
-			ctx.bindValue(observeSelectionDateTimeObserveWidget,
-					dueDateTodoObserveValue, null, null);
+			IObservableValue observeSelectionDateTimeObserveWidget = WidgetProperties.selection().observe(dateTime);
+			IObservableValue dueDateTodoObserveValue = PojoProperties.value(Todo.FIELD_DUEDATE).observe(todo);
+			ctx.bindValue(observeSelectionDateTimeObserveWidget, dueDateTodoObserveValue, null, null);
 
 			// Register for the changes
 			providers = ctx.getValidationStatusProviders();
@@ -145,10 +146,22 @@ public class TodoDetailsPart {
 		}
 	}
 
+	private void enableUserInterface(boolean b) {
+		// TODO Auto-generated method stub
+
+	}
+
 	@Focus
 	public void onFocus() {
 		// The following assumes that you have a Text field
 		// called summary
 		summary.setFocus();
+	}
+
+	@Persist
+	public void save(ITodoService todoService) {
+		if (todo != null)
+			todoService.saveTodo(todo);
+		dirty.setDirty(false);
 	}
 }
