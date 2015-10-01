@@ -81,8 +81,9 @@ public class TodoOverviewPart {
 			public void selectionChanged(SelectionChangedEvent event) {
 
 				if (!partService.getDirtyParts().isEmpty()) {
-					MessageDialog.openConfirm(shell, "Confirm selection",
+					boolean save = MessageDialog.openConfirm(shell, "Confirm selection",
 							"You have changes in your current selection. Do you want to save them?");
+					if (save)
 					partService.saveAll(false);
 				}
 				IStructuredSelection selection = viewer.getStructuredSelection();
