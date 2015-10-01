@@ -7,7 +7,9 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.EMenuService;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -22,6 +24,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
 import com.example.e4.rcp.todo.model.ITodoService;
@@ -33,7 +36,13 @@ public class TodoOverviewPart {
 	private TableViewer viewer;
 
 	@Inject
+	Shell shell;
+
+	@Inject
 	ESelectionService selectionService;
+
+	@Inject
+	EPartService partService;
 
 	@PostConstruct
 	public void createUserInterface(Composite parent, final ITodoService model, EMenuService menuService) {
@@ -70,8 +79,12 @@ public class TodoOverviewPart {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				// TODO checkout if TodoDetailsPart contains modified data and
-				// trigger confirmation dialog
+
+				if (!partService.getDirtyParts().isEmpty()) {
+					MessageDialog.openConfirm(shell, "Confirm selection",
+							"You have changes in your current selection. Do you want to save them?");
+					partService.saveAll(false);
+				}
 				IStructuredSelection selection = viewer.getStructuredSelection();
 				selectionService.setSelection(selection.getFirstElement());
 			}
