@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmi:id="_Ba9WQGgfEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.application">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_ECEicGgfEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.trimmedwindow.taskmanager" label="TaskManager" x="100" y="100" width="600" height="400">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_2A-w0GgfEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.perspectivestack.0">
+      <children xsi:type="advanced:Perspective" xmi:id="__kg8kGgfEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.perspective.to-do" label="To-do">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_GqYMAGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.partsashcontainer.main" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_Qhy9EGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.partstack.0">
+            <children xsi:type="basic:Part" xmi:id="_eCIVkGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.part.overview" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.TodoOverviewPart" label="Overview"/>
+          </children>
+        </children>
+        <children xsi:type="basic:PartSashContainer" xmi:id="_Rr3jgGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.partsashcontainer.0">
+          <children xsi:type="basic:PartStack" xmi:id="_V7oIgGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.partstack.1">
+            <children xsi:type="basic:Part" xmi:id="_eZshAGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.part.details" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.TodoDetailsPart" label="Details"/>
+          </children>
+          <children xsi:type="basic:PartStack" xmi:id="_WWQPAGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.partstack.2">
+            <children xsi:type="basic:Part" xmi:id="_eu-0gGggEeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.part.playground" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.PlaygroundPart" label="Playground"/>
+          </children>
+        </children>
+      </children>
+    </children>
+  </children>
+  <addons xmi:id="_Ba9WQWgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_Ba9WQmgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_Ba9WQ2gfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_Ba9WRGgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_Ba9WRWgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_Ba9WRmgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="_Ba9WR2gfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+</application:Application>

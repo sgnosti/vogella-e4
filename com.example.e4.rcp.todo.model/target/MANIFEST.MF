@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Export-Package: com.example.e4.rcp.todo.model
+Bundle-Vendor: EXAMPLE
+Bundle-Version: 1.0.0.201409020857
+Bundle-Name: Model
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: com.example.e4.rcp.todo.model
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+
