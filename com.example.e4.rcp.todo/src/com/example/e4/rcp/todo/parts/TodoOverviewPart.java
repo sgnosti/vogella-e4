@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -36,7 +37,7 @@ public class TodoOverviewPart {
 	ESelectionService selectionService;
 
 	@PostConstruct
-	public void createUserInterface(Composite parent, final ITodoService model) {
+	public void createUserInterface(Composite parent, final ITodoService model, EMenuService menuService) {
 		GridLayout layout = new GridLayout(2, false);
 		parent.setLayout(layout);
 		GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, false);
@@ -84,6 +85,8 @@ public class TodoOverviewPart {
 				viewer.setInput(model.getTodos());
 			}
 		});
+		
+		menuService.registerContextMenu(viewer.getControl(), "com.example.e4.rcp.todo.popupmenu.table");
 
 	}
 
