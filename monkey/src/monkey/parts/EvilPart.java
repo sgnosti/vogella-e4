@@ -13,16 +13,19 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.workbench.IWorkbench;
 
 public class EvilPart {
 	
 	private EvilMonkey monkey;
 	private IEclipseContext ctx;
+	private IWorkbench wb;
 	
 	@Inject
-	public EvilPart(IEclipseContext ctx) {
+	public EvilPart(IEclipseContext ctx, IWorkbench wb) {
 		System.out.println("Constructor");
 		this.ctx = ctx;
+		this.wb = wb;
 	}
 	
 	@Inject

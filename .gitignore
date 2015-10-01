@@ -4,3 +4,8 @@ workspace/
 
 runtime-*/
 osgi-exercise.zip
+
+**/bin/
+*.class
+
+
