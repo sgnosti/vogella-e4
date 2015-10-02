@@ -2,8 +2,15 @@ package com.example.e4.rcp.todo.services.internal;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.inject.Inject;
+
+import org.eclipse.e4.core.services.events.IEventBroker;
+
+import com.example.e4.rcp.todo.events.MyEventConstants;
 import com.example.e4.rcp.todo.model.ITodoService;
 import com.example.e4.rcp.todo.model.Todo;
 
@@ -11,6 +18,9 @@ public class MyTodoServiceImpl implements ITodoService {
 
 	private static int current = 1;
 	private List<Todo> todos;
+
+	@Inject
+	private IEventBroker broker;
 
 	public MyTodoServiceImpl() {
 		todos = createInitialModel();
@@ -44,7 +54,10 @@ public class MyTodoServiceImpl implements ITodoService {
 
 		// Send out events
 		if (created) {
+			broker.post(MyEventConstants.TOPIC_TODO_NEW, createEventData(MyEventConstants.TOPIC_TODO_NEW, updateTodo));
 		} else {
+			broker.post(MyEventConstants.TOPIC_TODO_UPDATE,
+					createEventData(MyEventConstants.TOPIC_TODO_UPDATE, updateTodo));
 		}
 		return true;
 	}
@@ -65,6 +78,8 @@ public class MyTodoServiceImpl implements ITodoService {
 
 		if (deleteTodo != null) {
 			todos.remove(deleteTodo);
+			broker.post(MyEventConstants.TOPIC_TODO_DELETE,
+					createEventData(MyEventConstants.TOPIC_TODO_DELETE, deleteTodo));
 			return true;
 		}
 		return false;
@@ -98,4 +113,10 @@ public class MyTodoServiceImpl implements ITodoService {
 		return null;
 	}
 
+	private Map<String, String> createEventData(String topic, Todo todo) {
+		Map<String, String> result = new HashMap<>();
+		result.put(MyEventConstants.TOPIC_TODO, topic);
+		result.put(Todo.FIELD_ID, String.valueOf(todo.getId()));
+		return result;
+	}
 }

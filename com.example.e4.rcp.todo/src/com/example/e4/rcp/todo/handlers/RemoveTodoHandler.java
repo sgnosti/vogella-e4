@@ -28,7 +28,8 @@ public class RemoveTodoHandler {
 		// todo is optional in case the selection is not a Todo object
 		if (todo != null) {
 			model.deleteTodo(todo.getId());
-			broker.post(MyEventConstants.TOPIC_TODO_DELETE, createEventData(MyEventConstants.TOPIC_TODO_DELETE, todo));
+			// broker.post(MyEventConstants.TOPIC_TODO_DELETE,
+			// createEventData(MyEventConstants.TOPIC_TODO_DELETE, todo));
 		}
 
 	}
