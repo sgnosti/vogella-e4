@@ -44,6 +44,7 @@
   <handlers xmi:id="_H5bXEGg2EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.handler.new" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.NewTodoHandler" command="_vEePsGg1EeWC5YZ3MCQNQw"/>
   <handlers xmi:id="_KK64kGg2EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.handler.remove" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.RemoveTodoHandler" command="_3LR-wGg1EeWC5YZ3MCQNQw"/>
   <handlers xmi:id="_L8SvkGg2EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.handler.test" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.TestHandler" command="_3PjawGg1EeWC5YZ3MCQNQw"/>
+  <handlers xmi:id="_SEyawGjZEeW92vHirt5uJw" elementId="com.example.e4.rcp.todo.handler.0" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.handlers.ValidateHandler" command="_Vtp-4GjZEeW92vHirt5uJw"/>
   <bindingTables xmi:id="_tqaakGg3EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.bindingtable.bindingdialogs" bindingContext="_mga5EGg3EeWC5YZ3MCQNQw">
     <bindings xmi:id="_vRj-kGg3EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.keybinding.0" keySequence="M1+S" command="_olmHwGg1EeWC5YZ3MCQNQw"/>
     <bindings xmi:id="_0rtTEGg3EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.keybinding.1" keySequence="M1+X" command="_u6P8sGg1EeWC5YZ3MCQNQw"/>
@@ -51,11 +52,13 @@
   <bindingTables xmi:id="_CU9-EGg4EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.bindingtable.bindingwindows" bindingContext="_oUFPEGg3EeWC5YZ3MCQNQw"/>
   <rootContext xmi:id="_mga5EGg3EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.bindingcontext.dialogs" name="Dialogs"/>
   <rootContext xmi:id="_oUFPEGg3EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.bindingcontext.windows" name="Windows"/>
+  <descriptors xmi:id="_ZuxLQGjWEeW92vHirt5uJw" elementId="com.example.e4.rcp.todo.partdescriptor.dynamic" label="Dynamic Part" allowMultiple="true" contributionURI="bundleclass://com.example.e4.rcp.todo/com.example.e4.rcp.todo.parts.DynamicPart"/>
   <commands xmi:id="_olmHwGg1EeWC5YZ3MCQNQw" elementId="org.eclipse.ui.file.saveAll" commandName="Save"/>
   <commands xmi:id="_u6P8sGg1EeWC5YZ3MCQNQw" elementId="org.eclipse.ui.file.exit" commandName="Exit"/>
   <commands xmi:id="_vEePsGg1EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.command.new" commandName="New Todo"/>
   <commands xmi:id="_3LR-wGg1EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.command.remove" commandName="Remove Todo"/>
   <commands xmi:id="_3PjawGg1EeWC5YZ3MCQNQw" elementId="com.example.e4.rcp.todo.command.test" commandName="For testing"/>
+  <commands xmi:id="_Vtp-4GjZEeW92vHirt5uJw" elementId="com.example.e4.rcp.todo.command.validate" commandName="Validate"/>
   <addons xmi:id="_Ba9WQWgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_Ba9WQmgfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Ba9WQ2gfEeWC5YZ3MCQNQw" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
