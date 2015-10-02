@@ -1,11 +1,14 @@
 package com.example.e4.rcp.todo.parts;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
@@ -27,6 +30,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
+import com.example.e4.rcp.todo.events.MyEventConstants;
 import com.example.e4.rcp.todo.model.ITodoService;
 import com.example.e4.rcp.todo.model.Todo;
 
@@ -43,6 +47,9 @@ public class TodoOverviewPart {
 
 	@Inject
 	EPartService partService;
+
+	@Inject
+	ITodoService model;
 
 	@PostConstruct
 	public void createUserInterface(Composite parent, final ITodoService model, EMenuService menuService) {
@@ -108,6 +115,15 @@ public class TodoOverviewPart {
 	@Focus
 	public void setFocus() {
 		button.setFocus();
+	}
+
+	@Inject
+	@Optional
+	private void subscribeTopicTodoAllTopics(
+			@UIEventTopic(MyEventConstants.TOPIC_TODO_ALLTOPICS) Map<String, String> event) {
+		if (viewer != null) {
+			viewer.setInput(model.getTodos());
+		}
 	}
 
 }
